@@ -39,6 +39,7 @@ Si se desea correr en firefox simplemente usamos el siguiente comando
 
 ## Revisando Reporte
 El reporte se hace con el framework Extent Reports, el cual generará un archivo html y quedara ubicado en la ruta `MicrosoftFramework/target/reports`
+
 ![image](https://user-images.githubusercontent.com/25933257/151751480-bc4fca5d-644f-43cd-bad8-efe37f481509.png)
 
 
