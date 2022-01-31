@@ -17,7 +17,7 @@ public class ShoppingCartTest extends BaseTest{
                 .clickItem(1);
         itemDetailsPage.AddItemToCart();
         Assert.assertEquals(1, itemDetailsPage.getShoppingCartAmount());
-        Driver.getDriver().navigate().back();
+        Driver.back();
         resultSearchPage.clickItem(2);
         itemDetailsPage.AddItemToCart();
         Assert.assertEquals(2, itemDetailsPage.getShoppingCartAmount());

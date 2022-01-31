@@ -9,18 +9,17 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class Browsers {
 
-    public static WebDriver getBrowser(String browser) {
-        System.out.println("browser: " + browser);
+    public static WebDriver getBrowser(Browser browser) {
         if (browser == null) {
             return null;
         }
-        if (browser.equals("chrome")) {
+        if (browser == Browser.CHROME) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--incognito");
             return new ChromeDriver(options);
         }
-        else if (browser.equals("firefox")) {
+        else if (browser == Browser.FIREFOX) {
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions firefoxOptions = new FirefoxOptions();
             firefoxOptions.addArguments("-private");
