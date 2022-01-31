@@ -27,7 +27,7 @@ Para correr este framework de forma local se debe tener instalado los siguiente 
 ## Corriendo el framework
 Una ves instalados Java y Maven con todas sus variables de entorno, pasamos a clonar el repositorio con el comando:
 
-`git clone https://github.com/desteban1117/GoogleFramework.git`
+`https://github.com/desteban1117/MicrosoftFramework.git`
 
 entramos a la carpeta `MicrosoftFramework` y utilizamos el siguiente comando para correr los dos scenarios descritos previamente
 `mvn clean test`
@@ -36,3 +36,9 @@ Por default el framework corre usando Google Chrome. Actualmente el framework so
 Si se desea correr en firefox simplemente usamos el siguiente comando
 
 `mvn clean test -DBROWSER=firefox`
+
+## Revisando Reporte
+El reporte se hace con el framework Extent Reports, el cual generará un archivo html y quedara ubicado en la ruta `MicrosoftFramework/target/reports`
+![image](https://user-images.githubusercontent.com/25933257/151751480-bc4fca5d-644f-43cd-bad8-efe37f481509.png)
+
+
