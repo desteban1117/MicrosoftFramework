@@ -9,7 +9,7 @@ public class MicrosoftRedirectionMessage extends BasePage{
     WebElement stayButton;
 
     public void stayInStoreIfMessageAppear() {
-        if(isDisplayed(stayButton, 5)) {
+        if(isDisplayed(stayButton, 2)) {
             click(stayButton);
         }
     }
