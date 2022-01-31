@@ -28,8 +28,7 @@ public class SearchValidationTest extends BaseTest{
     @Test(dataProvider = "data")
     public void searchValidationTest(Search search) {
         HomeMenu homeMenu = new HomeMenu();
-        homeMenu.search(search.getSearch());
-        ResultSearchPage resultSearchPage = new ResultSearchPage();
+        ResultSearchPage resultSearchPage = homeMenu.search(search.getSearch());
         MicrosoftRedirectionMessage message = new MicrosoftRedirectionMessage();
         message.stayInStoreIfMessageAppear();
         resultSearchPage.clickShopLink();
@@ -39,19 +38,17 @@ public class SearchValidationTest extends BaseTest{
     }
 
     @Test
-    public void shoppingCartTest() {
+    public void shoppingCartTest() throws InterruptedException {
         HomeMenu homeMenu = new HomeMenu();
-        homeMenu.search("Halo");
-        ResultSearchPage resultSearchPage = new ResultSearchPage();
+        ResultSearchPage resultSearchPage = homeMenu.search("Halo");
         MicrosoftRedirectionMessage message = new MicrosoftRedirectionMessage();
         message.stayInStoreIfMessageAppear();
-        resultSearchPage.clickShopLink();
-        resultSearchPage.clickFirstItem();
-        ItemDetailsPage itemDetailsPage = new ItemDetailsPage();
+        ItemDetailsPage itemDetailsPage = resultSearchPage.clickShopLink()
+                .clickItem(1);
         itemDetailsPage.AddItemToCart();
         Assert.assertEquals(1, itemDetailsPage.getShoppingCartAmount());
         Driver.getDriver().navigate().back();
-        resultSearchPage.clickSecondItem();
+        resultSearchPage.clickItem(2);
         itemDetailsPage.AddItemToCart();
         Assert.assertEquals(2, itemDetailsPage.getShoppingCartAmount());
 

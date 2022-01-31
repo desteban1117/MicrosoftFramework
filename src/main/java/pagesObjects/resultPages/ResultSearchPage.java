@@ -1,5 +1,6 @@
 package pagesObjects.resultPages;
 
+import ItemPages.ItemDetailsPage;
 import drivers.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,27 +14,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static waits.Waits.waitUntilElementListSizeGreaterThan;
+
 public class ResultSearchPage extends BasePage {
 
     @FindBy(linkText = "Comprar")
     WebElement shopLink;
 
-    @FindAll(@FindBy(className = "m-channel-placement-item"))
+    @FindBy(className = "m-channel-placement-item")
     List<WebElement> items;
 
     @FindBy(xpath = "//span[.='Siguiente']")
     WebElement nexButton;
 
-    public void clickShopLink() {
+    public ResultSearchPage clickShopLink() {
         click(shopLink);
+        return this;
     }
 
-    public void clickFirstItem() {
-        click(items.get(0));
-    }
-
-    public void clickSecondItem() {
-        click(items.get(1));
+    public ItemDetailsPage clickItem(int itemNumber) {
+        waitUntilElementListSizeGreaterThan(items, 2);
+        WebElement item = items.get(itemNumber - 1);
+        click(item);
+        return new ItemDetailsPage();
     }
 
     public boolean isResultDisplayed(String value) {

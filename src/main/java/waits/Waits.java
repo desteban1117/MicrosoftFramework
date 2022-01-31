@@ -2,11 +2,17 @@ package waits;
 
 import drivers.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.function.Function;
 
 public class Waits {
     private static final int TIME = 10;
@@ -33,5 +39,16 @@ public class Waits {
 
     public static WebElement elementToBeClickable(By locator) {
         return new WebDriverWait(Driver.getDriver(), TIME).until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public static void waitUntilElementListSizeGreaterThan(List<WebElement> elements, int size) {
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getDriver())
+                .withTimeout(Duration.ofSeconds(10L))
+                .pollingEvery(Duration.ofSeconds(1L))
+                .ignoring(NoSuchElementException.class);
+        wait.until(new Function<WebDriver, Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                return (elements.size() > size);
+            }});
     }
 }
