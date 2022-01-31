@@ -7,7 +7,7 @@
         </classes>
     </test>
 
-    <test name="shoppingCartTest">
+    <test name="Shopping Cart Test">
         <classes>
             <class name="ShoppingCartTest"/>
         </classes>

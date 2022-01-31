@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.function.Function;
 
 public class Waits {
-    private static final int TIME = 10;
+    private static final long TIME = 10L;
 //Duration.ofSeconds(TIME, 0)
     public static WebElement visibilityOf(WebElement element) {
         return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(TIME)).until(ExpectedConditions.visibilityOf(element));
     }
 
-    public static WebElement visibilityOf(WebElement element, int time) {
+    public static WebElement visibilityOf(WebElement element, long time) {
         return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(time)).until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -33,7 +33,7 @@ public class Waits {
         return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(TIME)).until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public static WebElement elementToBeClickable(WebElement element, int time) {
+    public static WebElement elementToBeClickable(WebElement element, long time) {
         return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(time)).until(ExpectedConditions.elementToBeClickable(element));
     }
 

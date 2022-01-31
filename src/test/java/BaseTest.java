@@ -36,9 +36,9 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result, ITestContext context) throws IOException {
+    public void afterMethod(ITestResult result) throws IOException {
         if(result.getStatus() == ITestResult.SUCCESS) {
-            test.log(LogStatus.PASS, context.getName());
+            test.log(LogStatus.PASS, result.getMethod().getMethodName());
         }
 
         if(result.getStatus() == ITestResult.FAILURE) {
@@ -47,7 +47,7 @@ public class BaseTest {
                     + ".png");
             String errflpath = Dest.getAbsolutePath();
             FileUtils.copyFile(scrFile, Dest);
-            test.log(LogStatus.FAIL,test.addScreenCapture(errflpath)+ context.getName() + "\nError: " + result.getThrowable().getMessage());
+            test.log(LogStatus.FAIL,test.addScreenCapture(errflpath)+ result.getMethod().getMethodName() + "\nError: " + result.getThrowable().getMessage());
         }
     }
     @AfterTest
