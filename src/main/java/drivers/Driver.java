@@ -17,7 +17,7 @@ public class Driver {
             }
             else {
                 driver = Browsers.getBrowser(Browser.CHROME);
-                browser = Browser.FIREFOX;
+                browser = Browser.CHROME;
             }
         }
         return driver;
