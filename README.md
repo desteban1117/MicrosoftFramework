@@ -30,6 +30,7 @@ Una ves instalados Java y Maven con todas sus variables de entorno, pasamos a cl
 `https://github.com/desteban1117/MicrosoftFramework.git`
 
 entramos a la carpeta `MicrosoftFramework` y utilizamos el siguiente comando para correr los dos scenarios descritos previamente
+
 `mvn clean test`
 
 Por default el framework corre usando Google Chrome. Actualmente el framework solo soporta dos browsers, firefox y crhome.
