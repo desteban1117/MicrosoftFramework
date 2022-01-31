@@ -37,23 +37,6 @@ public class SearchValidationTest extends BaseTest{
         Assert.assertEquals(resultSearchPage.getItemsNumber(), search.getResultNumber());
     }
 
-    @Test
-    public void shoppingCartTest() throws InterruptedException {
-        HomeMenu homeMenu = new HomeMenu();
-        ResultSearchPage resultSearchPage = homeMenu.search("Halo");
-        MicrosoftRedirectionMessage message = new MicrosoftRedirectionMessage();
-        message.stayInStoreIfMessageAppear();
-        ItemDetailsPage itemDetailsPage = resultSearchPage.clickShopLink()
-                .clickItem(1);
-        itemDetailsPage.AddItemToCart();
-        Assert.assertEquals(1, itemDetailsPage.getShoppingCartAmount());
-        Driver.getDriver().navigate().back();
-        resultSearchPage.clickItem(2);
-        itemDetailsPage.AddItemToCart();
-        Assert.assertEquals(2, itemDetailsPage.getShoppingCartAmount());
-
-    }
-
     @DataProvider(name = "data")
     public Object[][] getData() throws IOException, ParseException {
         Object content = new JSONParser().parse(new FileReader("src/main/resources/data.json"));

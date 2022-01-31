@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="MicrosoftSuit" verbose="1" >
+    <test name="Search Validation Test" >
+        <classes>
+            <class name="SearchValidationTest" />
+        </classes>
+    </test>
+
+    <test name="shoppingCartTest">
+        <classes>
+            <class name="ShoppingCartTest"/>
+        </classes>
+    </test>
+</suite>

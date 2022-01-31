@@ -18,37 +18,45 @@ public class Waits {
     private static final int TIME = 10;
 //Duration.ofSeconds(TIME, 0)
     public static WebElement visibilityOf(WebElement element) {
-        return new WebDriverWait(Driver.getDriver(), TIME).until(ExpectedConditions.visibilityOf(element));
+        return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(TIME)).until(ExpectedConditions.visibilityOf(element));
     }
 
     public static WebElement visibilityOf(WebElement element, int time) {
-        return new WebDriverWait(Driver.getDriver(), TIME).until(ExpectedConditions.visibilityOf(element));
+        return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(time)).until(ExpectedConditions.visibilityOf(element));
     }
 
     public static WebElement visibilityOfElementLocated(By locator) {
-        return new WebDriverWait(Driver.getDriver(), TIME).until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(TIME)).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public static WebElement elementToBeClickable(WebElement element) {
-        return new WebDriverWait(Driver.getDriver(), TIME).until(ExpectedConditions.elementToBeClickable(element));
+        return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(TIME)).until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static WebElement elementToBeClickable(WebElement element, int time) {
-        return new WebDriverWait(Driver.getDriver(), TIME).until(ExpectedConditions.elementToBeClickable(element));
+        return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(time)).until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static WebElement elementToBeClickable(By locator) {
-        return new WebDriverWait(Driver.getDriver(), TIME).until(ExpectedConditions.elementToBeClickable(locator));
+        return new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(TIME)).until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     public static void waitUntilElementListSizeGreaterThan(List<WebElement> elements, int size) {
         Wait<WebDriver> wait = new FluentWait<WebDriver>(Driver.getDriver())
-                .withTimeout(Duration.ofSeconds(10L))
+                .withTimeout(Duration.ofSeconds(TIME))
                 .pollingEvery(Duration.ofSeconds(1L))
                 .ignoring(NoSuchElementException.class);
         wait.until(new Function<WebDriver, Boolean>() {
             public Boolean apply(WebDriver driver) {
                 return (elements.size() > size);
             }});
+    }
+
+    public static void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

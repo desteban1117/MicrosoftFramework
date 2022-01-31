@@ -5,10 +5,9 @@ import drivers.Driver;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,22 +20,25 @@ public class BaseTest {
     static ExtentTest test;
     static ExtentReports report;
 
-    @BeforeTest
-    public void beforeTest() {
-        System.out.println("=================== ubicacion report: "+System.getProperty("user.dir"));
+    @BeforeSuite
+    public void beforeSuit() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyMMddHHmmss");
         report = new ExtentReports(System.getProperty("user.dir")+"\\target\\reports\\Report" +
                 dtf.format(LocalDateTime.now()) + ".html");
-        test = report.startTest("ExtentDemo");
+        test = report.startTest("Microsoft Tests");
+    }
+
+    @BeforeTest
+    public void beforeTest() {
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10, 0));
         Driver.getDriver().get("https://www.microsoft.com/es-mx/");
     }
 
     @AfterMethod
-    public void afterMethod(ITestResult result) throws IOException {
+    public void afterMethod(ITestResult result, ITestContext context) throws IOException {
         if(result.getStatus() == ITestResult.SUCCESS) {
-            test.log(LogStatus.PASS, "Navigated to the specified URL");
+            test.log(LogStatus.PASS, context.getName());
         }
 
         if(result.getStatus() == ITestResult.FAILURE) {
@@ -45,12 +47,16 @@ public class BaseTest {
                     + ".png");
             String errflpath = Dest.getAbsolutePath();
             FileUtils.copyFile(scrFile, Dest);
-            test.log(LogStatus.FAIL,test.addScreenCapture(errflpath)+ "Error: " + result.getThrowable().getMessage());
+            test.log(LogStatus.FAIL,test.addScreenCapture(errflpath)+ context.getName() + "\nError: " + result.getThrowable().getMessage());
         }
     }
     @AfterTest
     public void afterTest() {
         Driver.quitDriver();
+    }
+
+    @AfterSuite
+    public void afterSuit() {
         report.endTest(test);
         report.flush();
     }

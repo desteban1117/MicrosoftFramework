@@ -34,8 +34,8 @@ public class ResultSearchPage extends BasePage {
 
     public ItemDetailsPage clickItem(int itemNumber) {
         waitUntilElementListSizeGreaterThan(items, 2);
-        WebElement item = items.get(itemNumber - 1);
-        click(item);
+        Waits.sleep(3000);
+        click(items.get(itemNumber-1));
         return new ItemDetailsPage();
     }
 
