@@ -35,7 +35,8 @@ public class BasePage {
     }
 
     protected void click(WebElement element) {
-        elementToBeClickable(element).click();
+        elementToBeClickable(element);
+        element.click();
     }
 
     protected void click(WebElement element, int time) {
